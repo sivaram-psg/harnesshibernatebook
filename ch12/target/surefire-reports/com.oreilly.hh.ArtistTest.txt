@@ -1,0 +1,46 @@
+-------------------------------------------------------------------------------
+Test set: com.oreilly.hh.ArtistTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.81 sec <<< FAILURE!
+testSave(com.oreilly.hh.ArtistTest)  Time elapsed: 1.789 sec  <<< ERROR!
+java.lang.Exception: Transaction failed
+	at com.oreilly.hh.ArtistTest.testSave(ArtistTest.java:43)
+Caused by: org.hibernate.exception.ConstraintViolationException: could not insert: [com.oreilly.hh.data.Artist]
+	at org.hibernate.exception.SQLStateConverter.convert(SQLStateConverter.java:71)
+	at org.hibernate.exception.JDBCExceptionHelper.convert(JDBCExceptionHelper.java:43)
+	at org.hibernate.id.insert.AbstractReturningDelegate.performInsert(AbstractReturningDelegate.java:40)
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:2158)
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:2638)
+	at org.hibernate.action.EntityIdentityInsertAction.execute(EntityIdentityInsertAction.java:48)
+	at org.hibernate.engine.ActionQueue.execute(ActionQueue.java:250)
+	at org.hibernate.event.def.AbstractSaveEventListener.performSaveOrReplicate(AbstractSaveEventListener.java:298)
+	at org.hibernate.event.def.AbstractSaveEventListener.performSave(AbstractSaveEventListener.java:181)
+	at org.hibernate.event.def.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:107)
+	at org.hibernate.event.def.DefaultMergeEventListener.entityIsTransient(DefaultMergeEventListener.java:186)
+	at org.hibernate.event.def.DefaultMergeEventListener.onMerge(DefaultMergeEventListener.java:123)
+	at org.hibernate.event.def.DefaultMergeEventListener.onMerge(DefaultMergeEventListener.java:53)
+	at org.hibernate.impl.SessionImpl.fireMerge(SessionImpl.java:677)
+	at org.hibernate.impl.SessionImpl.merge(SessionImpl.java:661)
+	at org.hibernate.impl.SessionImpl.merge(SessionImpl.java:665)
+	at com.oreilly.hh.ArtistTest.testSave(ArtistTest.java:33)
+	... 26 more
+Caused by: java.sql.SQLException: integrity constraint violation: unique constraint or index violation; SYS_CT_10049 table: ARTIST
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCPreparedStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCPreparedStatement.executeUpdate(Unknown Source)
+	at org.hibernate.id.IdentityGenerator$GetGeneratedKeysDelegate.executeAndExtract(IdentityGenerator.java:73)
+	at org.hibernate.id.insert.AbstractReturningDelegate.performInsert(AbstractReturningDelegate.java:33)
+	... 40 more
+Caused by: org.hsqldb.HsqlException: integrity constraint violation: unique constraint or index violation; SYS_CT_10049 table: ARTIST
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.Constraint.getException(Unknown Source)
+	at org.hsqldb.index.IndexAVLMemory.insert(Unknown Source)
+	at org.hsqldb.persist.RowStoreAVL.indexRow(Unknown Source)
+	at org.hsqldb.Table.insertSingleRow(Unknown Source)
+	at org.hsqldb.StatementDML.insertRowSet(Unknown Source)
+	at org.hsqldb.StatementInsert.getResult(Unknown Source)
+	at org.hsqldb.StatementDMQL.execute(Unknown Source)
+	at org.hsqldb.Session.executeCompiledStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 44 more
+

@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 8 Jul, 2011 8:01:19 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.oreilly.hh.data.Track" table="track">
+        <meta attribute="class-description" inherit="false">Represents a single playable track in the music database. @author Jim Elliott (with help from Hibernate)</meta>
+        <id name="id" type="int">
+            <meta attribute="class-description" inherit="false">Represents a single playable track in the music database. @author Jim Elliott (with help from Hibernate)</meta>
+            <meta attribute="scope-set" inherit="false">protected</meta>
+            <column name="TRACK_ID" />
+            <generator class="native"></generator>
+        </id>
+        <property name="title" type="string">
+            <meta attribute="class-description" inherit="false">Represents a single playable track in the music database. @author Jim Elliott (with help from Hibernate)</meta>
+            <meta attribute="use-in-tostring" inherit="false">true</meta>
+            <column name="TITLE" not-null="true" />
+        </property>
+        <property name="filePath" type="string">
+            <meta attribute="class-description" inherit="false">Represents a single playable track in the music database. @author Jim Elliott (with help from Hibernate)</meta>
+            <column name="filePath" not-null="true" />
+        </property>
+        <property name="playTime" type="time">
+            <meta attribute="class-description" inherit="false">Represents a single playable track in the music database. @author Jim Elliott (with help from Hibernate)</meta>
+            <meta attribute="field-description" inherit="false">Playing time</meta>
+            <column name="playTime" />
+        </property>
+        <set name="artists" table="TRACK_ARTISTS" inverse="false" lazy="true">
+            <meta attribute="class-description" inherit="false">Represents a single playable track in the music database. @author Jim Elliott (with help from Hibernate)</meta>
+            <key>
+                <column name="TRACK_ID" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.oreilly.hh.data.Artist">
+                <column name="ARTIST_ID" not-null="true" />
+            </many-to-many>
+        </set>
+        <property name="added" type="date">
+            <meta attribute="class-description" inherit="false">Represents a single playable track in the music database. @author Jim Elliott (with help from Hibernate)</meta>
+            <meta attribute="field-description" inherit="false">When the track was created</meta>
+            <column name="added" />
+        </property>
+        <property name="volume" type="com.oreilly.hh.StereoVolumeType">
+            <meta attribute="class-description" inherit="false">Represents a single playable track in the music database. @author Jim Elliott (with help from Hibernate)</meta>
+            <meta attribute="field-description" inherit="false">How loud to play the track</meta>
+            <meta attribute="use-in-tostring" inherit="false">true</meta>
+            <column name="VOL_LEFT" />
+            <column name="VOL_RIGHT" />
+        </property>
+        <property name="sourceMedia" type="com.oreilly.hh.SourceMediaType">
+            <meta attribute="class-description" inherit="false">Represents a single playable track in the music database. @author Jim Elliott (with help from Hibernate)</meta>
+            <meta attribute="field-description" inherit="false">Media on which track was obtained</meta>
+            <meta attribute="use-in-tostring" inherit="false">true</meta>
+            <column name="sourceMedia" />
+        </property>
+        <set name="comments" table="TRACK_COMMENTS" inverse="false" lazy="true">
+            <meta attribute="class-description" inherit="false">Represents a single playable track in the music database. @author Jim Elliott (with help from Hibernate)</meta>
+            <key>
+                <column name="TRACK_ID" not-null="true" />
+            </key>
+            <element type="string">
+                <column name="COMMENT" />
+            </element>
+        </set>
+    </class>
+</hibernate-mapping>

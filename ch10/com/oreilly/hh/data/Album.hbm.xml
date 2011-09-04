@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 8 Jul, 2011 8:01:19 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.oreilly.hh.data.Album" table="ALBUM">
+        <meta attribute="class-description" inherit="false">Represents an album in the music database, an organized list of tracks. @author Jim Elliott (with help from
+        Hibernate)</meta>
+        <id name="id" type="int">
+            <meta attribute="class-description" inherit="false">Represents an album in the music database, an organized list of tracks. @author Jim Elliott (with help from
+            Hibernate)</meta>
+            <meta attribute="scope-set" inherit="false">protected</meta>
+            <column name="ALBUM_ID" />
+            <generator class="native"></generator>
+        </id>
+        <property name="title" type="string">
+            <meta attribute="class-description" inherit="false">Represents an album in the music database, an organized list of tracks. @author Jim Elliott (with help from
+            Hibernate)</meta>
+            <meta attribute="use-in-tostring" inherit="false">true</meta>
+            <column name="TITLE" not-null="true" />
+        </property>
+        <property name="numDiscs" type="integer">
+            <meta attribute="class-description" inherit="false">Represents an album in the music database, an organized list of tracks. @author Jim Elliott (with help from
+            Hibernate)</meta>
+            <column name="numDiscs" />
+        </property>
+        <set name="artists" table="ALBUM_ARTISTS" inverse="false" lazy="true">
+            <meta attribute="class-description" inherit="false">Represents an album in the music database, an organized list of tracks. @author Jim Elliott (with help from
+            Hibernate)</meta>
+            <key>
+                <column name="ALBUM_ID" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.oreilly.hh.data.Artist">
+                <column name="ARTIST_ID" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="comments" table="ALBUM_COMMENTS" inverse="false" lazy="true">
+            <meta attribute="class-description" inherit="false">Represents an album in the music database, an organized list of tracks. @author Jim Elliott (with help from
+            Hibernate)</meta>
+            <key>
+                <column name="ALBUM_ID" not-null="true" />
+            </key>
+            <element type="string">
+                <column name="COMMENT" />
+            </element>
+        </set>
+        <list name="tracks" inverse="false" table="ALBUM_TRACKS" lazy="true" cascade="all">
+            <meta attribute="class-description" inherit="false">Represents an album in the music database, an organized list of tracks. @author Jim Elliott (with help from
+            Hibernate)</meta>
+            <meta attribute="use-in-tostring" inherit="false">true</meta>
+            <key>
+                <column name="ALBUM_ID" not-null="true" />
+            </key>
+            <list-index>
+                <column name="LIST_POS" not-null="true" />
+            </list-index>
+            <composite-element class="com.oreilly.hh.data.AlbumTrack">
+                <meta attribute="class-description" inherit="false">Represents an album in the music database, an organized list of tracks. @author Jim Elliott (with help from
+                Hibernate)</meta>
+                <meta attribute="use-in-tostring" inherit="false">true</meta>
+                <many-to-one name="track" class="com.oreilly.hh.data.Track" cascade="all">
+                    <meta attribute="class-description" inherit="false">Represents an album in the music database, an organized list of tracks. @author Jim Elliott (with help from
+                    Hibernate)</meta>
+                    <meta attribute="use-in-tostring" inherit="false">true</meta>
+                    <column name="TRACK_ID" />
+                </many-to-one>
+                <property name="disc" type="integer">
+                    <meta attribute="class-description" inherit="false">Represents an album in the music database, an organized list of tracks. @author Jim Elliott (with help from
+                    Hibernate)</meta>
+                    <column name="disc" />
+                </property>
+                <property name="positionOnDisc" type="integer">
+                    <meta attribute="class-description" inherit="false">Represents an album in the music database, an organized list of tracks. @author Jim Elliott (with help from
+                    Hibernate)</meta>
+                    <column name="positionOnDisc" />
+                </property>
+            </composite-element>
+        </list>
+        <property name="added" type="date">
+            <meta attribute="class-description" inherit="false">Represents an album in the music database, an organized list of tracks. @author Jim Elliott (with help from
+            Hibernate)</meta>
+            <meta attribute="field-description" inherit="false">When the album was created</meta>
+            <column name="added" />
+        </property>
+    </class>
+</hibernate-mapping>
